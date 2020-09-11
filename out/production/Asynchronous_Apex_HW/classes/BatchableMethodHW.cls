@@ -5,9 +5,9 @@
 public with sharing class BatchableMethodHW implements Database.Batchable<SObject> {
 
     public Database.QueryLocator start(Database.BatchableContext param1) {
-        return Database.getQueryLocator('SELECT Account.BillingStreet, Account.BillingCity,' +
-                'Account.BillingState, Account.BillingCountry, Account.BillingPostalCode,' +
-                'Account.Updated_By_Contact__c  FROM Contact WHERE Is_Synced__c = TRUE');
+        return Database.getQueryLocator('SELECT Account.BillingStreet, Account.BillingCity, ' +
+                'Account.BillingState, Account.BillingCountry, Account.BillingPostalCode ' +
+                'FROM Contact WHERE Is_Synced__c = false');
     }
 
     public void execute(Database.BatchableContext param1, List<Contact> contacts) {
