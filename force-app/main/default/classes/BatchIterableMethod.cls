@@ -38,7 +38,6 @@ public with sharing class BatchIterableMethod implements Database.Batchable<Cont
         }
     }
 
-
     public with sharing class MyIterator implements Iterator<Contact> {
         List<Contact> contacts { get; set; }
         Integer i { get; set; }
@@ -72,6 +71,4 @@ public with sharing class BatchIterableMethod implements Database.Batchable<Cont
             return contacts[i - 1];
         }
     }
-
-
 }

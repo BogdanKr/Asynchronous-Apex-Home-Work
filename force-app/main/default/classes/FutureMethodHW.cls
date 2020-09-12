@@ -5,9 +5,9 @@
 public with sharing class FutureMethodHW {
     @Future
     public static void changeContactFields() {
-        List<Account> accounts = [SELECT Id, BillingAddress, (SELECT Id FROM Contacts) FROM Account LIMIT 150];
+//        List<Account> accounts = [SELECT Id, BillingAddress, (SELECT Id FROM Contacts) FROM Account LIMIT 150];
         List<Contact> contacts = new List<Contact>();
-        for (Account acc : accounts) {
+        for (Account acc : [SELECT Id, BillingAddress, (SELECT Id FROM Contacts) FROM Account LIMIT 150]) {
             if (acc.BillingAddress != null) {
                 for (Contact contact : acc.Contacts){
                     contact.Is_Synced__c = false;
@@ -19,5 +19,4 @@ public with sharing class FutureMethodHW {
         update contacts;
         System.debug('Finish future method');
     }
-
 }

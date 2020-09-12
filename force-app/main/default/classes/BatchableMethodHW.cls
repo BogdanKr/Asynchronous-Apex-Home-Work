@@ -32,6 +32,4 @@ public with sharing class BatchableMethodHW implements Database.Batchable<SObjec
 
     public void finish(Database.BatchableContext param1) {
     }
-
-
 }
