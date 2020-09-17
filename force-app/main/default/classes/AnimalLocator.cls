@@ -9,8 +9,6 @@ public with sharing class AnimalLocator {
         request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals/' + id);
         request.setMethod('GET');
         HttpResponse response = http.send(request);
-//        System.debug(response.getBody());
-//        System.debug(JSON.deserializeUntyped(response.getBody()));
         Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
         Map<String, Object> animal =  (Map<String, Object>) results.get('animal');
 //        System.debug(animal.get('name'));
