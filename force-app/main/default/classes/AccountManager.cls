@@ -3,13 +3,11 @@
  */
 
 @RestResource(UrlMapping='/Accounts/*')
-
 global with sharing class AccountManager {
     @HttpGet
     global static Account getAccount() {
         RestRequest request = RestContext.request;
-//        String accountId = request.requestURI.substringAfter('/Accounts/');
-//        accountId = accountId.substring(0, accountId.lastIndexOf('/'));
+//        String accountId = request.requestURI.substringBetween('Accounts/', '/Contacts');
         String accountId = request.requestURI.substring(
                 request.requestURI.lastIndexOf('/') + 1);
         Account result = [
@@ -28,7 +26,6 @@ global with sharing class AccountManager {
         // Iterate through each parameter field and value
         Account thisAccount = new Account();
         for (String fieldName : params.keySet()) {
-            // Set the field and value on the Case sObject
             thisAccount.put(fieldName, params.get(fieldName));
         }
         insert thisAccount;
@@ -51,10 +48,7 @@ global with sharing class AccountManager {
                 Name = name,
                 Phone = phone,
                 Website = website);
-        // Match case by Id, if present.
-        // Otherwise, create new case.
         upsert thisAccount;
-        // Return the case ID.
         return thisAccount.Id;
     }
     @HttpPatch
@@ -67,7 +61,6 @@ global with sharing class AccountManager {
         Map<String, Object> params = (Map<String, Object>) JSON.deserializeUntyped(request.requestBody.toString());
         // Iterate through each parameter field and value
         for (String fieldName : params.keySet()) {
-            // Set the field and value on the Case sObject
             thisAccount.put(fieldName, params.get(fieldName));
         }
         update thisAccount;

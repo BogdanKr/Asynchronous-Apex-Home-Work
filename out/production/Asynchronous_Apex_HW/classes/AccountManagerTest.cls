@@ -9,7 +9,7 @@ public with sharing class AccountManagerTest {
         // Set up a test request
         RestRequest request = new RestRequest();
         request.requestURI =
-                'https:/cunning-fox-2asnae-dev-ed.lightning.force.com/services/apexrest/Accounts/' + recordId + '/contacts';
+                'https:/cunning-fox-2asnae-dev-ed.lightning.force.com/services/apexrest/Accounts/' + recordId;
         request.httpMethod = 'GET';
         RestContext.request = request;
         // Call the method to test
@@ -23,7 +23,6 @@ public with sharing class AccountManagerTest {
     }
 
     static Id createTestRecord() {
-        // Create test record
         Account accountTest = new Account(
                 Name = 'Test record');
         insert accountTest;
